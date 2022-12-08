@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cardshadow">#f7a960</color>
+    <color name="cardborders">#9e5f2f</color>
+    <color name="edittextborders">#f3cfb4</color>
+    <color name="ringcolor">#e28743</color>
 </resources>

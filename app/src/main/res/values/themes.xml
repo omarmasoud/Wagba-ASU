@@ -13,4 +13,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="edittexts">
+        <item name="background">@drawable/edit_text_bg</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:width">1000dp</item>
+    </style>
+    <style name="buttons">
+<!--        <item name="background">@drawable/edit_text_bg</item>-->
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
 </resources>

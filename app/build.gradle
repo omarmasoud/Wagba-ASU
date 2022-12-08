@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 32
     buildToolsVersion "33.0.1"
 
     defaultConfig {
         applicationId "com.example.wagba"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
 
@@ -33,6 +33,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

@@ -1,14 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthenticationScreens.SignUpScreen">
+    android:background="@drawable/oriental_food"
+    tools:context=".AuthenticationScreens.LoginScreen">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/white"
 
-</FrameLayout>
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="20dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/inner_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".AuthenticationScreens.LoginScreen"
+            tools:ignore="MissingClass">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SignupText"
+                android:layout_gravity="center"
+
+                />
+            <EditText
+                android:id="@+id/edittextfirstname"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                style="@style/edittexts"
+                android:hint="@string/firstnamehint"
+                android:inputType="text" />
+            <EditText
+                android:id="@+id/edittextlastname"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                style="@style/edittexts"
+                android:hint="@string/lastnamehint"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextTextEmailAddress"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                style="@style/edittexts"
+                android:hint="@string/emailhint"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/editTextTextPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/edittexts"
+                android:background="@drawable/edit_text_bg"
+
+                android:hint="@string/passwordhint"
+                android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/editTextTextreenterPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/edittexts"
+                android:background="@drawable/edit_text_bg"
+
+                android:hint="@string/reenterpasswordhint"
+                android:inputType="textPassword" />
+
+
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signup" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

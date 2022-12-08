@@ -1,68 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraint_layout"
+    android:id="@+id/signin_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/oriental_food"
     tools:context=".AuthenticationScreens.LoginScreen">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/LoginText"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583" />
-
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/emailhint"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="@string/passwordhint"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="109dp"
-        android:layout_height="63dp"
-        android:layout_marginBottom="28dp"
-        android:text="@string/login"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="@string/signup"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:strokeColor="@color/cardborders"
+        app:strokeWidth="3dp"
+        android:outlineAmbientShadowColor="@color/cardshadow"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="20dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/inner_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".AuthenticationScreens.LoginScreen"
+            tools:ignore="MissingClass">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/LoginText"
+                android:layout_gravity="center"
+
+                />
+
+            <EditText
+                android:id="@+id/editTextTextEmailAddress"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                style="@style/edittexts"
+                android:drawableLeft="@drawable/emailicon"
+                android:hint="@string/emailhint"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/editTextTextPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/edittexts"
+                android:background="@drawable/edit_text_bg"
+                android:drawableLeft="@drawable/passwordicon"
+                android:hint="@string/passwordhint"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/button"
+                style="@style/buttons"
+                android:layout_width="109dp"
+                android:layout_height="63dp"
+                android:text="@string/login"
+                android:backgroundco="#00FF00"/>
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signup" />
+        </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
