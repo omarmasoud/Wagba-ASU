@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Wagba</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="LoginText">Login with your Credentials please</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="emailhint">within ENG ASU domain</string>
+    <string name="passwordhint">contain at least a number</string>
+</resources>
