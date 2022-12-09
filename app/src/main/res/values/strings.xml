@@ -11,4 +11,6 @@
     <string name="firstnamehint">First Name</string>
     <string name="lastnamehint">Last Name</string>
     <string name="reenterpasswordhint">Re-enter your password</string>
+    <string name="incrementtext">+</string>
+    <string name="decrementtext">-</string>
 </resources>

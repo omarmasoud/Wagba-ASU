@@ -9,6 +9,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:elevation="20dp"
         android:outlineAmbientShadowColor="@color/cardshadow"
         app:cardCornerRadius="20dp"
@@ -34,6 +35,7 @@
                 android:layout_height="200dp"
                 android:layout_centerHorizontal="true"
                 app:cardCornerRadius="100dp"
+                android:layout_margin="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/menu_card_layout"
                 app:layout_constraintEnd_toStartOf="@+id/item_name"
                 app:layout_constraintStart_toStartOf="@+id/menu_card_layout"
@@ -49,10 +51,11 @@
 
             <TextView
                 android:id="@+id/item_name"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="Restaurant name"
+                android:text="Dish name"
+                android:gravity="center"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="20dp"
 
@@ -64,10 +67,38 @@
                 app:layout_constraintTop_toBottomOf="@id/item_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/menu_item_imagecard"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/items_add_remove_layout"
                 android:numStars="4"
                 android:stepSize="0.2"
                 />
+            <LinearLayout
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/menu_item_imagecard"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/items_add_remove_layout"
+                android:layout_marginBottom="10dp">
+                <Button
+                    android:id="@+id/increment"
+                    style="@style/incrementdecrementbutton"
+                    android:background="@drawable/rounded_buttons_green"
+                    android:text="@string/incrementtext"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="1"
+                    />
+                <Button
+                    android:id="@+id/decrement"
+                    style="@style/incrementdecrementbutton"
+                    android:background="@drawable/rounded_buttons_red"
+                    android:text="@string/decrementtext"
+                    />
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

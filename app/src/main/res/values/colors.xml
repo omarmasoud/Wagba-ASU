@@ -11,4 +11,7 @@
     <color name="cardborders">#9e5f2f</color>
     <color name="edittextborders">#f3cfb4</color>
     <color name="ringcolor">#e28743</color>
+    <color name="greenadd">#2ded1b</color>
+    <color name="redremove">#ed1b1b</color>
+
 </resources>
