@@ -71,7 +71,7 @@
                 android:layout_width="109dp"
                 android:layout_height="63dp"
                 android:text="@string/login"
-                android:backgroundco="#00FF00"/>
+                />
 
             <Button
                 android:id="@+id/button2"
