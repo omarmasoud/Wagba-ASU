@@ -13,4 +13,14 @@
     <string name="reenterpasswordhint">Re-enter your password</string>
     <string name="incrementtext">+</string>
     <string name="decrementtext">-</string>
+    <string name="duetag">Due Amount:</string>
+    <string name="dueamount">40 LE</string>
+    <string name="cardnumber">Credit Card Number</string>
+    <string name="expirydate">Expiry Date</string>
+    <string name="ccv">CCV</string>
+    <string name="cardholdername">CardHolder Name</string>
+    <string name="save">Save</string>
+    <string name="creditcardinfotextview">Enter your Payment card info please</string>
+    <string name="restaurant_name">Restaurant name</string>
+    <string name="dish_name">Dish name</string>
 </resources>

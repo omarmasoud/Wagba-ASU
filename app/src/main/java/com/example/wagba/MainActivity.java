@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.wagba.AuthenticationScreens.LoginScreen;
+import com.example.wagba.GeneralScreens.PaymentScreen;
 
 import java.util.Timer;
 import java.util.TimerTask;

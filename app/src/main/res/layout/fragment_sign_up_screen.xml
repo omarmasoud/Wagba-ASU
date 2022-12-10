@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/inner_linearlayout"
+            android:id="@+id/payment_inner_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -61,7 +61,7 @@
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/cardnumber_edittext"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/card_expiry_date_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/edittexts"

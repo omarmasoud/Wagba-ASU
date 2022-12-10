@@ -54,10 +54,11 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="Dish name"
+                style="@style/textviews"
+                android:text="@string/dish_name"
                 android:gravity="center"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textSize="20dp"
+                android:textSize="24dp"
 
                 app:layout_constraintEnd_toEndOf="parent" />
             <RatingBar

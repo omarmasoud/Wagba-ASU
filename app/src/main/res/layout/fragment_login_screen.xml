@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/inner_linearlayout"
+            android:id="@+id/payment_inner_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -37,6 +37,7 @@
 
             <TextView
                 android:id="@+id/textView"
+                style="@style/textviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/LoginText"
@@ -45,7 +46,7 @@
                 />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/cardnumber_edittext"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,7 +57,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/edittexts"
@@ -66,7 +67,7 @@
                 android:inputType="textPassword" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/login_btn"
                 style="@style/buttons"
                 android:layout_width="109dp"
                 android:layout_height="63dp"
@@ -74,7 +75,7 @@
                 />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/sign_up_btn"
                 style="@style/buttons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
