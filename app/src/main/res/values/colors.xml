@@ -8,10 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cardshadow">#f7a960</color>
-    <color name="cardborders">#9e5f2f</color>
+    <color name="cardfilling">#f9d4a4</color>
+    <color name="cardborders">#f7e5ce</color>
     <color name="edittextborders">#f3cfb4</color>
     <color name="ringcolor">#e28743</color>
     <color name="greenadd">#2ded1b</color>
     <color name="redremove">#ed1b1b</color>
+    <color name="recycler_background">#e4a655</color>
 
 </resources>

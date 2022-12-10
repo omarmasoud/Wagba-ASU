@@ -15,8 +15,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         android:text="@string/duetag"
+        android:textSize="30dp"
+        android:fontFamily="@font/lobstertwo_bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/deliveryorpickup"/>
 
     <TextView
         android:id="@+id/dueamount"
@@ -24,10 +27,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="200dp"
+        android:fontFamily="@font/lobstertwo_italic"
         android:text="@string/dueamount"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@id/duetag"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/deliveryorpickup"/>
+
 
     <RadioGroup
         android:id="@+id/deliveryorpickup"
@@ -50,6 +58,7 @@
             android:id="@+id/delivery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:gravity="center"
             android:text="Delivery" />
     </RadioGroup>
@@ -67,6 +76,7 @@
             android:id="@+id/credit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:gravity="center"
             android:text="CreditCard" />
 

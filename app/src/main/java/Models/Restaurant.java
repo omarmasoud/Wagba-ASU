@@ -1,8 +1,20 @@
 package Models;
 
+import android.widget.ImageView;
+
 public class Restaurant {
     private String name;
     private float rating;
+    private String location;
+    ImageView image;
+
+    public ImageView getImage() {
+        return image;
+    }
+
+    public void setImage(ImageView image) {
+        this.image = image;
+    }
 
     public Restaurant(){}
     public String getName() {
@@ -29,6 +41,6 @@ public class Restaurant {
         this.location = location;
     }
 
-    private String location;
+
 
 }

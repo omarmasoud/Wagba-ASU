@@ -2,13 +2,24 @@ package com.example.wagba.RestaurantRelatedScreens;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.wagba.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import Models.Restaurant;
+import Recyclers.RestaurantsRecyclerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +58,9 @@ public class RestaurantsScreen extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+    ArrayList<Restaurant> restaurantArrayList=new ArrayList<>();
+    Restaurant dummyrestaurant =new Restaurant();//dummy object for validating view
+    RecyclerView restaurantsRecycler;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +68,39 @@ public class RestaurantsScreen extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        ImageView dummyimage=new ImageView(getContext());
+        dummyimage.setImageResource(R.drawable.wagba);
+        dummyrestaurant.setImage(dummyimage);
+        dummyrestaurant.setName("My restaurant");
+        dummyrestaurant.setLocation("near abdo basha");
+        dummyrestaurant.setRating((float) 3.4);
+        this.restaurantArrayList.add(dummyrestaurant);
+        this.restaurantArrayList.add(dummyrestaurant);
+        this.restaurantArrayList.add(dummyrestaurant);
+        this.restaurantArrayList.add(dummyrestaurant);
+        this.restaurantArrayList.add(dummyrestaurant);
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_restaurants_screen, container, false);
+    }
+
+
+
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        restaurantsRecycler=getView().findViewById(R.id.restaurants_recycler);
+        RestaurantsRecyclerAdapter restaurantsRecyclerAdapter=new RestaurantsRecyclerAdapter(restaurantArrayList);
+        restaurantsRecycler.setAdapter(restaurantsRecyclerAdapter);
+        restaurantsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }
