@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
                 Fragment loginScreen=new LoginScreen();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.fragmentcontainer));
                 fragmentTransaction.replace(R.id.fragmentcontainer, loginScreen);
                 fragmentTransaction.commit();
             }

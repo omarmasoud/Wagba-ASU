@@ -23,4 +23,6 @@
     <string name="creditcardinfotextview">Enter your Payment card info please</string>
     <string name="restaurant_name">Restaurant name</string>
     <string name="dish_name">Dish name</string>
+    <string name="restaurant_location_hint">Restaurant Location hint</string>
+    <string name="item_price">Price:30 LE</string>
 </resources>

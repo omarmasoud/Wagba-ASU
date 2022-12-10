@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:id="@+id/menu_item_layout"
+    >
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:elevation="20dp"
+        android:backgroundTint="@color/cardfilling"
+
         android:outlineAmbientShadowColor="@color/cardshadow"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,8 +35,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/menu_item_imagecard"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 app:cardCornerRadius="100dp"
                 android:layout_margin="5dp"
@@ -61,16 +65,31 @@
                 android:textSize="24dp"
 
                 app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                style="@style/textviews"
+                android:text="@string/item_price"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/item_name"
+                app:layout_constraintBottom_toTopOf="@id/item_rating"
+                android:textSize="18dp"
+                android:textColor="@color/shadowbg"
+                app:layout_constraintEnd_toEndOf="parent" />
             <RatingBar
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:id="@+id/item_rating"
-                app:layout_constraintTop_toBottomOf="@id/item_name"
+                app:layout_constraintTop_toBottomOf="@id/item_price"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/menu_item_imagecard"
                 app:layout_constraintBottom_toTopOf="@id/items_add_remove_layout"
                 android:numStars="4"
                 android:stepSize="0.2"
+                android:clickable="false"
+                android:isIndicator="true"
                 />
             <LinearLayout
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -90,6 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
+                    android:id="@+id/item_count"
                     android:text="1"
                     />
                 <Button

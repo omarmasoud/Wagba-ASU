@@ -5,14 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wagba.AuthenticationScreens.LoginScreen;
 import com.example.wagba.R;
+import com.example.wagba.RestaurantRelatedScreens.MenuScreen;
 
 import java.util.ArrayList;
 
@@ -40,6 +46,18 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         holder.Image=restaurant.getImage();
         holder.Rating.setRating(restaurant.getRating());
         holder.Name.setText(restaurant.getName());
+        holder.Location.setText(restaurant.getLocation());
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment menuScreen=new MenuScreen();
+                FragmentManager fragmentManager = ((AppCompatActivity)view.getContext()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, menuScreen);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         
     
 
@@ -51,14 +69,18 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
     }
 
     public class RestaurantsRecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView Name;
+        TextView Name,Location;
         RatingBar Rating;
         ImageView Image;
+        ConstraintLayout layout;
         public RestaurantsRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             Name=itemView.findViewById(R.id.restaurant_name);
             Rating=itemView.findViewById(R.id.restaurant_rating);
             Image=itemView.findViewById(R.id.restaurant_image);
+            Location=itemView.findViewById(R.id.restaurant_location);
+            layout=itemView.findViewById(R.id.restaurant_item_layout);
+
         }
 
 
