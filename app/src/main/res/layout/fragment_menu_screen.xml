@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    >
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_gravity="center"
+    android:id="@+id/coordinator"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/gotocart"
     android:background="@color/recycler_background"
     >
     <com.google.android.material.appbar.AppBarLayout
@@ -37,10 +46,23 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/menu_item"
 
-        tools:itemCount="10"
+        tools:itemCount="3"
         />
 
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+<Button
+
+    app:layout_constraintTop_toBottomOf="@id/coordinator"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginBottom="30dp"
+    android:layout_width="match_parent"
+    android:id="@+id/gotocart"
+    android:layout_height="wrap_content"
+
+    android:textSize="20sp"
+    android:text="@string/go_to_cart"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

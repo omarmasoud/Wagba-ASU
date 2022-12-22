@@ -1,4 +1,4 @@
-package Models;
+package com.example.wagba.Models;
 
 import java.util.ArrayList;
 //Singleton

@@ -17,6 +17,7 @@
     <style name="edittexts">
         <item name="background">@drawable/edit_text_bg</item>
         <item name="android:layout_margin">20dp</item>
+        <item name="android:layout_height">35dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:width">1000dp</item>
     </style>
@@ -29,6 +30,14 @@
     <style name="incrementdecrementbutton">
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>
+    </style>
+    <style name="incrementdecrementbutton.add">
+        <item name="colorAccent">@color/greenadd</item>
+        <item name="background">@drawable/rounded_buttons_green</item>
+    </style>
+    <style name="incrementdecrementbutton.remove">
+        <item name="colorAccent">@color/redremove</item>
+        <item name="background">@drawable/rounded_buttons_red</item>
     </style>
     <style name="textviews">
         <item name="android:layout_marginTop">20dp</item>

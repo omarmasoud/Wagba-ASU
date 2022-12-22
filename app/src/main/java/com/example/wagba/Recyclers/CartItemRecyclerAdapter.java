@@ -1,7 +1,6 @@
-package Recyclers;
+package com.example.wagba.Recyclers;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,32 +17,32 @@ import com.example.wagba.R;
 
 import java.util.ArrayList;
 
-import Models.MenuItem;
+import com.example.wagba.Models.MenuItem;
 
 
-public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecyclerAdapter.MenuItemsRecyclerViewHolder> {
-    ArrayList<MenuItem> menuItems;
+public class CartItemRecyclerAdapter extends RecyclerView.Adapter<CartItemRecyclerAdapter.CartItemsRecyclerViewHolder> {
+    ArrayList<MenuItem> cartItems;
 
-    public MenuItemRecyclerAdapter(ArrayList<MenuItem> menuItems) {
-        this.menuItems = menuItems;
+    public CartItemRecyclerAdapter(ArrayList<MenuItem> menuItems) {
+        this.cartItems = menuItems;
     }
 
     @NonNull
     @Override
-    public MenuItemsRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CartItemsRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.menu_item, parent, false);
-        MenuItemsRecyclerViewHolder viewHolder = new MenuItemsRecyclerViewHolder(view);
+        View view = inflater.inflate(R.layout.cart_item, parent, false);
+        CartItemsRecyclerViewHolder viewHolder = new CartItemsRecyclerViewHolder(view);
         return viewHolder;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MenuItemsRecyclerViewHolder holder, int position) {
-        MenuItem menuItem = this.menuItems.get(position);
+    public void onBindViewHolder(@NonNull CartItemsRecyclerViewHolder holder, int position) {
+        MenuItem menuItem = this.cartItems.get(position);
         holder.Image = menuItem.getImage();
-        holder.Rating.setRating(menuItem.getRating());
+//        holder.Rating.setRating(menuItem.getRating());
         holder.Name.setText(menuItem.getName());
         holder.Price.setText(Float.toString(menuItem.getPrice()) + " LE");
         holder.count.setText(Integer.toString(menuItem.getCount()));
@@ -73,29 +72,23 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
         holder.add.setOnClickListener(listener);
         holder.remove.setOnClickListener(listener);
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
     }
 
     @Override
     public int getItemCount() {
-        return this.menuItems != null ? this.menuItems.size() : 0;
+        return this.cartItems != null ? this.cartItems.size() : 0;
     }
 
-    public class MenuItemsRecyclerViewHolder extends RecyclerView.ViewHolder {
+    public class CartItemsRecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView Name, Price, count;
         RatingBar Rating;
         ImageView Image;
         Button add, remove;
         ConstraintLayout layout;
 
-        public MenuItemsRecyclerViewHolder(@NonNull View itemView) {
+        public CartItemsRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             Name = itemView.findViewById(R.id.item_name);
             Rating = itemView.findViewById(R.id.item_rating);
@@ -104,7 +97,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
             count = itemView.findViewById(R.id.item_count);
             add = itemView.findViewById(R.id.increment);
             remove = itemView.findViewById(R.id.decrement);
-            layout = itemView.findViewById(R.id.menu_item_layout);
+            layout = itemView.findViewById(R.id.cart_item_layout);
 
         }
 

@@ -46,44 +46,39 @@
                 android:id="@+id/edittextfirstname"
 
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_bg"
                 style="@style/edittexts"
                 android:hint="@string/firstnamehint"
                 android:inputType="text" />
             <EditText
                 android:id="@+id/edittextlastname"
-
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_bg"
                 style="@style/edittexts"
                 android:hint="@string/lastnamehint"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/cardnumber_edittext"
+                android:id="@+id/email"
 
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_bg"
                 style="@style/edittexts"
                 android:hint="@string/emailhint"
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/card_expiry_date_edittext"
+                android:id="@+id/password"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 style="@style/edittexts"
+
                 android:background="@drawable/edit_text_bg"
 
                 android:hint="@string/passwordhint"
                 android:inputType="textPassword" />
             <EditText
-                android:id="@+id/editTextTextreenterPassword"
+                android:id="@+id/reenterpassword"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 style="@style/edittexts"
                 android:background="@drawable/edit_text_bg"
 
@@ -91,12 +86,11 @@
                 android:inputType="textPassword" />
 
 
-
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/signup"
                 style="@style/buttons"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="34dp"
                 android:text="@string/signup" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

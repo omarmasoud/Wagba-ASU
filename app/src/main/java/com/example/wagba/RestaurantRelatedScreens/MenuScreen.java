@@ -4,24 +4,25 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.wagba.R;
 
 import java.util.ArrayList;
 
-import Models.MenuItem;
-import Recyclers.MenuItemRecyclerAdapter;
+import com.example.wagba.Models.MenuItem;
+import com.example.wagba.Recyclers.MenuItemRecyclerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +64,7 @@ public class MenuScreen extends Fragment {
     RecyclerView recyclerView;
     ArrayList<MenuItem>menuItems;
     MenuItemRecyclerAdapter adapter;
+    Button cartbtn;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +97,21 @@ public class MenuScreen extends Fragment {
         recyclerView=view.findViewById(R.id.menu_recycler);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext() ));
+        cartbtn=view.findViewById(R.id.gotocart);
+        cartbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                        Fragment cartScreen=new CartScreen();
+                        FragmentManager fragmentManager = ((AppCompatActivity)view.getContext()).getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontainer, cartScreen);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+
+        });
+
 
     }
 

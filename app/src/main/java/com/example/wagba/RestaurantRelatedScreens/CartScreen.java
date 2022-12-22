@@ -2,13 +2,28 @@ package com.example.wagba.RestaurantRelatedScreens;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
+import com.example.wagba.GeneralScreens.PaymentScreen;
 import com.example.wagba.R;
+
+import java.util.ArrayList;
+
+import com.example.wagba.Models.MenuItem;
+import com.example.wagba.Recyclers.CartItemRecyclerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +62,9 @@ public class CartScreen extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    RecyclerView recyclerView;
+    CartItemRecyclerAdapter adapter;
+    ArrayList<MenuItem> menuItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +73,24 @@ public class CartScreen extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        menuItems=new ArrayList<>();
+        MenuItem DummyMenuItem=new MenuItem();
+        ImageView dummyimage=new ImageView(getContext());
+        dummyimage.setImageResource(R.drawable.wagba);
+        DummyMenuItem.setImage(dummyimage);
+        DummyMenuItem.setName("Shawerma Crepe");
+        DummyMenuItem.setCount(1);
+        DummyMenuItem.setPrice(60);
+
+        for (int i = 0 ;i<20; i++)
+        {
+            menuItems.add(DummyMenuItem);
+        }
+
+
+        adapter=new CartItemRecyclerAdapter(menuItems);
+
+
     }
 
     @Override
@@ -62,5 +98,26 @@ public class CartScreen extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart_screen, container, false);
+    }
+    Button gotopayment;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView=view.findViewById(R.id.cart_recycler);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext() ));
+        gotopayment=view.findViewById(R.id.gotopayment);
+        gotopayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment payment=new PaymentScreen();
+                FragmentManager fragmentManager = ((AppCompatActivity)view.getContext()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, payment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
     }
 }

@@ -1,7 +1,9 @@
-package Recyclers;
+package com.example.wagba.Recyclers;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,18 +18,27 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wagba.AuthenticationScreens.LoginScreen;
+
 import com.example.wagba.R;
+import com.example.wagba.RemoteAccess.FirebaseAccessor;
 import com.example.wagba.RestaurantRelatedScreens.MenuScreen;
 
 import java.util.ArrayList;
 
-import Models.Restaurant;
+import com.example.wagba.Models.Restaurant;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<RestaurantsRecyclerAdapter.RestaurantsRecyclerViewHolder> {
+    Context context;
     ArrayList<Restaurant> restaurants;
-    public RestaurantsRecyclerAdapter(ArrayList<Restaurant> restaurants){
+    DatabaseReference reference;
+    public RestaurantsRecyclerAdapter(Context context,ArrayList<Restaurant> restaurants){
         this.restaurants=restaurants;
+        this.context=context;
     }
     @NonNull
     @Override
@@ -42,8 +53,31 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantsRecyclerViewHolder holder, int position) {
+        //Context context=holder.ge
         Restaurant restaurant=this.restaurants.get(position);
-        holder.Image=restaurant.getImage();
+
+         this.reference=FirebaseAccessor.getInstance().getRestaurantData("Food Corner");//reference to firebase image node of restaurant
+         this.reference.addListenerForSingleValueEvent(new ValueEventListener() {
+             @Override
+             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 String link=snapshot.getValue(String.class);
+                 Picasso.get()
+                         .load(link)// image url
+                         .fit()
+                         .into(holder.Image);
+             }
+
+             @Override
+             public void onCancelled(@NonNull DatabaseError error) {
+
+             }
+         });
+
+        Picasso.get()
+                .load(restaurant.getImageUrl())// image url
+                .fit()
+                .into(holder.Image);
+
         holder.Rating.setRating(restaurant.getRating());
         holder.Name.setText(restaurant.getName());
         holder.Location.setText(restaurant.getLocation());
@@ -56,6 +90,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
                 fragmentTransaction.replace(R.id.fragmentcontainer, menuScreen);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+//                Log.d("restaurant image url",restaurant.getImageUrl());
             }
         });
         

@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RestaurantRelatedScreens.CartScreen">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@color/recycler_background"
+    app:layout_constraintTop_toBottomOf="@id/cart_recycler"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_recycler"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/cart_item"
+
+        tools:itemCount="10"
+        />
+<androidx.appcompat.widget.AppCompatButton
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:text="@string/checkout"
+    android:textSize="30dp"
+    android:background="@color/cardshadow"
+    style="@style/buttons"
+    android:id="@+id/gotopayment"
+    android:fontFamily="@font/lobstertwo_bold"
+    android:layout_marginBottom="300dp"
+    />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

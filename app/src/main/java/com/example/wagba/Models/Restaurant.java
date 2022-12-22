@@ -1,4 +1,4 @@
-package Models;
+package com.example.wagba.Models;
 
 import android.widget.ImageView;
 
@@ -7,9 +7,19 @@ public class Restaurant {
     private float rating;
     private String location;
     ImageView image;
+    String ImageUrl;
+
 
     public ImageView getImage() {
         return image;
+    }
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
     }
 
     public void setImage(ImageView image) {

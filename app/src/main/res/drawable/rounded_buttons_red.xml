@@ -3,5 +3,4 @@
     android:shape="oval" android:innerRadius="20dp" >
     <solid android:color="@color/redremove"/>
 
-
 </shape>

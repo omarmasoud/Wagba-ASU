@@ -7,7 +7,7 @@
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
     <string name="emailhint">within ENG ASU domain</string>
-    <string name="passwordhint">contain at least a number</string>
+    <string name="passwordhint">8 characters contain at least a number and an Uppercase letter</string>
     <string name="firstnamehint">First Name</string>
     <string name="lastnamehint">Last Name</string>
     <string name="reenterpasswordhint">Re-enter your password</string>
@@ -25,4 +25,9 @@
     <string name="dish_name">Dish name</string>
     <string name="restaurant_location_hint">Restaurant Location hint</string>
     <string name="item_price">Price:30 LE</string>
+    <string name="checkout">Checkout</string>
+    <string name="go_to_cart">go to cart</string>
+    <string name="proceed">Proceed</string>
+    <string name="main">Main</string>
+    <string name="cart">Cart</string>
 </resources>

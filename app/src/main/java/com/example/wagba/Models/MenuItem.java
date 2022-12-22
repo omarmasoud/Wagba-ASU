@@ -1,6 +1,5 @@
-package Models;
+package com.example.wagba.Models;
 
-import android.media.Image;
 import android.widget.ImageView;
 
 public class MenuItem {
