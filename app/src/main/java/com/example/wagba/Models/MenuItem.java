@@ -8,6 +8,15 @@ public class MenuItem {
     private float price;
     private int count;
     private ImageView image;
+    private String ImageSource;
+
+    public String getImageSource() {
+        return ImageSource;
+    }
+
+    public void setImageSource(String imageSource) {
+        ImageSource = imageSource;
+    }
 
     public int getCount() {
         return count;

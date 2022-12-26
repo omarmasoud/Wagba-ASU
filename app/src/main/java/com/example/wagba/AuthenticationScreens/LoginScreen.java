@@ -1,5 +1,7 @@
 package com.example.wagba.AuthenticationScreens;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.wagba.Models.User;
 import com.example.wagba.R;
 import com.example.wagba.RestaurantRelatedScreens.MenuScreen;
 import com.example.wagba.RestaurantRelatedScreens.RestaurantsScreen;
@@ -35,7 +38,8 @@ import java.util.zip.Inflater;
  * create an instance of this fragment.
  */
 public class LoginScreen extends Fragment {
-
+    SharedPreferences usersharedprefs;
+    SharedPreferences.Editor editor;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -72,7 +76,8 @@ public class LoginScreen extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        usersharedprefs=getActivity().getApplicationContext().getSharedPreferences(User.UserSharedPref, Context.MODE_PRIVATE);
+        editor=usersharedprefs.edit();
 
     }
 
@@ -95,6 +100,7 @@ public class LoginScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         login = (Button) getView().findViewById(R.id.login_btn);
         signup=(Button) getView().findViewById(R.id.sign_up_btn);
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,7 +183,8 @@ public class LoginScreen extends Fragment {
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     fragmentTransaction.replace(R.id.fragmentcontainer, screen);
                                     fragmentTransaction.commit();
-//                                    editor.putString("Email", emailtext);
+                                    editor.putString("Email", emailtext);
+                                    Log.d("mail", emailtext);
 //                                    editor.putString("FName", fName.getText().toString());
 //                                    editor.putString("LName", lName.getText().toString());
 

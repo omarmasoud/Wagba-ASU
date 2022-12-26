@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.wagba.Models.User;
 import com.example.wagba.R;
+import com.example.wagba.RemoteAccess.FirebaseAccessor;
+import com.example.wagba.RestaurantRelatedScreens.RestaurantsScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -113,6 +117,8 @@ public class SignUpScreen extends Fragment {
                 String emailtext=email.getText().toString();
                 String passwordText=password.getText().toString();
                 String reenterPasswordText=rePassword.getText().toString();
+                String fnameText=fName.getText().toString();
+                String lnameText=lName.getText().toString();
                 boolean emailCheck=Pattern.compile(pattern).matcher(emailtext).matches();
                 boolean passwordCheck=Pattern.compile(passwordPattern).matcher(passwordText).matches();
                 boolean passwordsMatchCheck = (passwordText.equals(reenterPasswordText));
@@ -167,7 +173,17 @@ public class SignUpScreen extends Fragment {
                                     editor.putString("Email", emailtext);
                                     editor.putString("FName", fName.getText().toString());
                                     editor.putString("LName", lName.getText().toString());
+                                    editor.commit();
+                                    String UID =authenticator.getUid();
+                                    User newuser=new User(emailtext, fnameText, lnameText, UID);
+                                    FirebaseAccessor.getInstance().addUser(newuser);
 
+
+                                    Fragment screen=new RestaurantsScreen();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.fragmentcontainer, screen);
+                                    fragmentTransaction.commit();
                                     //updateUI(user);
 
                                 } else {

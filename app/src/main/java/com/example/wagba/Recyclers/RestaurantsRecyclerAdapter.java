@@ -56,7 +56,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         //Context context=holder.ge
         Restaurant restaurant=this.restaurants.get(position);
 
-         this.reference=FirebaseAccessor.getInstance().getRestaurantData("Food Corner");//reference to firebase image node of restaurant
+         this.reference=FirebaseAccessor.getInstance().getRestaurantData(restaurant.getName()).child("image");//reference to firebase image node of restaurant
          this.reference.addListenerForSingleValueEvent(new ValueEventListener() {
              @Override
              public void onDataChange(@NonNull DataSnapshot snapshot) {

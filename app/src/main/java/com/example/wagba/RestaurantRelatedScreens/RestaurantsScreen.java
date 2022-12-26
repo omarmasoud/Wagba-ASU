@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,10 @@ import com.example.wagba.Recyclers.RestaurantsRecyclerAdapter;
 import com.example.wagba.RemoteAccess.FirebaseAccessor;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -127,16 +133,38 @@ public class RestaurantsScreen extends Fragment {
 //        dummyrestaurant.setImage(dummyimage);
        // String DummyUrl =FirebaseAccessor.getInstance().getRestaurantData("Food Corner").getImageUrl();
         //dummyrestaurant.setImageUrl(DummyUrl);
-        dummyrestaurant.setName("My restaurant");
-        dummyrestaurant.setLocation("near abdo basha");
-        dummyrestaurant.setRating((float) 3.4);
-        this.restaurantArrayList.add(dummyrestaurant);
-        this.restaurantArrayList.add(dummyrestaurant);
-        this.restaurantArrayList.add(dummyrestaurant);
-        this.restaurantArrayList.add(dummyrestaurant);
-        this.restaurantArrayList.add(dummyrestaurant);
 
 
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseAccessor.getInstance().getRestaurants().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren())
+                {
+                    Restaurant restaurant=new Restaurant();
+                    Log.d("Restaurant Name", dataSnapshot.getKey());
+                    restaurant.setName(dataSnapshot.getKey());
+                    restaurant.setRating((float)3.20/*Float.parseFloat(dataSnapshot.child("Rating").getValue(String.class))*/);
+                    restaurant.setLocation(dataSnapshot.child("location").getValue(String.class));
+                    restaurant.setImageUrl(dataSnapshot.child("image").getValue(String.class));
+                    restaurantArrayList.add(restaurant);
+
+
+                }
+                setRecycler(restaurantArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -150,6 +178,17 @@ public class RestaurantsScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().findViewById(R.id.bottom_nav_bar).setVisibility(View.VISIBLE);
+        ConstraintLayout constraintLayout = getActivity().findViewById(R.id.main_layout);
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+        constraintSet.connect(R.id.fragmentcontainer,ConstraintSet.BOTTOM,R.id.bottom_nav_bar,ConstraintSet.TOP,0);
+        constraintSet.applyTo(constraintLayout);
+
+
+    }
+    public  void setRecycler(ArrayList<Restaurant>restaurantsArrayList)
+    {
         restaurantsRecycler = getView().findViewById(R.id.restaurants_recycler);
         restaurantsRecycler.setHasFixedSize(true);
         restaurantsRecycler.setItemViewCacheSize(20);
@@ -158,6 +197,5 @@ public class RestaurantsScreen extends Fragment {
         restaurantsRecyclerAdapter.notifyDataSetChanged();
         restaurantsRecycler.setAdapter(restaurantsRecyclerAdapter);
         restaurantsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        FirebaseAccessor.getInstance().getRestaurantData("Papa Johns");
     }
 }
