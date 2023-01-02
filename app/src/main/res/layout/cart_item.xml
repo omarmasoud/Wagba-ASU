@@ -11,17 +11,18 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:elevation="20dp"
+        app:cardElevation="12dp"
         android:backgroundTint="@color/cardfilling"
+
         android:outlineAmbientShadowColor="@color/cardshadow"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/cardborders"
-        app:strokeWidth="3dp">
+        app:strokeWidth="0.5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cart_card_layout"
@@ -37,13 +38,12 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
-                app:cardCornerRadius="100dp"
                 android:layout_margin="5dp"
-                app:layout_constraintBottom_toBottomOf="@+id/cart_card_layout"
-                app:layout_constraintEnd_toStartOf="@+id/item_name"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintEnd_toStartOf="@+id/orderId"
                 app:layout_constraintStart_toStartOf="@+id/cart_card_layout"
-                app:layout_constraintTop_toTopOf="@+id/cart_card_layout"
-                >
+                app:layout_constraintTop_toTopOf="@+id/cart_card_layout">
+
                 <ImageView
                     android:id="@+id/item_image"
                     android:layout_width="match_parent"
@@ -53,17 +53,17 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/item_name"
+                android:id="@+id/orderId"
+                style="@style/textviews"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                style="@style/textviews"
-                android:text="@string/dish_name"
                 android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/dish_name"
                 android:textSize="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
 
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/item_price"
@@ -76,37 +76,52 @@
                 android:textColor="@color/shadowbg"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/item_name" />
+                app:layout_constraintTop_toBottomOf="@id/orderId" />
 
             <LinearLayout
+                android:id="@+id/items_add_remove_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cart_item_imagecard"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/items_add_remove_layout"
-                android:layout_marginBottom="10dp">
+                app:layout_constraintTop_toBottomOf="@+id/item_price">
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/increment"
                     style="@style/incrementdecrementbutton"
                     android:background="@drawable/rounded_buttons_green"
-                    android:text="@string/incrementtext"/>
+                    android:text="@string/incrementtext" />
+
                 <TextView
+                    android:id="@+id/item_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:id="@+id/item_count"
-                    android:text="1"
-                    />
+                    android:text="1" />
+
                 <androidx.appcompat.widget.AppCompatButton
-                    android:background="@drawable/rounded_buttons_red"
                     android:id="@+id/decrement"
-                    style="@style/incrementdecrementbutton.remove"
-                    android:text="@string/decrementtext"
-                    />
+                    style="@style/incrementdecrementbutton"
+                    android:background="@drawable/rounded_buttons_red"
+                    android:text="@string/decrementtext" />
 
             </LinearLayout>
+
+            <Button
+
+                android:id="@+id/removefromcartbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/removeitemicon"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/items_add_remove_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cart_item_imagecard"
+                android:layout_marginVertical="10dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -25,6 +25,7 @@ import com.example.wagba.RestaurantRelatedScreens.RestaurantsScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -101,12 +102,16 @@ public class SignUpScreen extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button Signup=view.findViewById(R.id.signup);
-        EditText email, password,rePassword,fName,lName;
+        EditText email, password,rePassword,fName,lName,phone,age;
+        EditText gender;
         email=view.findViewById(R.id.email);
         password=view.findViewById(R.id.password);
         rePassword=view.findViewById(R.id.reenterpassword);
         fName=view.findViewById(R.id.edittextfirstname);
         lName=view.findViewById(R.id.edittextlastname);
+        gender= view.findViewById(R.id.genders);
+        phone=view.findViewById(R.id.phonenumber);
+        age=view.findViewById(R.id.edittextage);
         String pattern= "^(.+)@(eng.asu.edu.eg)";
         String passwordPattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
 
@@ -119,6 +124,9 @@ public class SignUpScreen extends Fragment {
                 String reenterPasswordText=rePassword.getText().toString();
                 String fnameText=fName.getText().toString();
                 String lnameText=lName.getText().toString();
+                String phonetext=phone.getText().toString();
+                String gendertext=gender.getText().toString();
+                String agetext=age.getText().toString();
                 boolean emailCheck=Pattern.compile(pattern).matcher(emailtext).matches();
                 boolean passwordCheck=Pattern.compile(passwordPattern).matcher(passwordText).matches();
                 boolean passwordsMatchCheck = (passwordText.equals(reenterPasswordText));
@@ -173,9 +181,13 @@ public class SignUpScreen extends Fragment {
                                     editor.putString("Email", emailtext);
                                     editor.putString("FName", fName.getText().toString());
                                     editor.putString("LName", lName.getText().toString());
+                                    editor.putString("Gender", gendertext);
+                                    editor.putString("Phone", phonetext);
+                                    editor.putString("Age", agetext);
+
                                     editor.commit();
                                     String UID =authenticator.getUid();
-                                    User newuser=new User(emailtext, fnameText, lnameText, UID);
+                                    User newuser=new User(emailtext, fnameText, lnameText, UID,gendertext,agetext);
                                     FirebaseAccessor.getInstance().addUser(newuser);
 
 

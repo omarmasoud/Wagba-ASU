@@ -16,14 +16,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.wagba.GeneralScreens.PaymentScreen;
+import com.example.wagba.Models.Cart;
 import com.example.wagba.R;
 
 import java.util.ArrayList;
 
 import com.example.wagba.Models.MenuItem;
 import com.example.wagba.Recyclers.CartItemRecyclerAdapter;
+import com.example.wagba.RemoteAccess.FirebaseAccessor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,22 +76,19 @@ public class CartScreen extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        menuItems=new ArrayList<>();
-        MenuItem DummyMenuItem=new MenuItem();
-        ImageView dummyimage=new ImageView(getContext());
-        dummyimage.setImageResource(R.drawable.wagba);
-        DummyMenuItem.setImage(dummyimage);
-        DummyMenuItem.setName("Shawerma Crepe");
-        DummyMenuItem.setCount(1);
-        DummyMenuItem.setPrice(60);
 
-        for (int i = 0 ;i<20; i++)
-        {
-            menuItems.add(DummyMenuItem);
+        adapter=new CartItemRecyclerAdapter(getContext());
+        try {
+            if(Cart.getCart().getItems().size()==0){
+                Toast.makeText(getContext(), "Cart is Empty please add items", Toast.LENGTH_LONG).show();
+            }
+        }
+        catch (Exception e){
+
+            Toast.makeText(getContext(), "Cart is Empty please add items", Toast.LENGTH_LONG).show();
+
         }
 
-
-        adapter=new CartItemRecyclerAdapter(menuItems);
 
 
     }
@@ -116,6 +116,8 @@ public class CartScreen extends Fragment {
                 fragmentTransaction.replace(R.id.fragmentcontainer, payment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+
             }
         });
 

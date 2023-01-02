@@ -1,68 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_gravity="center"
-    >
-<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:id="@+id/coordinator"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/gotocart"
     android:background="@color/recycler_background"
+
     >
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
 
-        <androidx.appcompat.widget.Toolbar
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <SearchView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menu_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/menu_item">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/menu_recycler"
-        android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:layout_height="0dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/menu_item"
-
-        tools:itemCount="3"
-        />
+    </ScrollView>
 
 
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-<Button
-
-    app:layout_constraintTop_toBottomOf="@id/coordinator"
-    app:layout_constraintBottom_toBottomOf="parent"
-    android:layout_marginBottom="30dp"
-    android:layout_width="match_parent"
-    android:id="@+id/gotocart"
-    android:layout_height="wrap_content"
-
-    android:textSize="20sp"
-    android:text="@string/go_to_cart"
-    />
 </androidx.constraintlayout.widget.ConstraintLayout>

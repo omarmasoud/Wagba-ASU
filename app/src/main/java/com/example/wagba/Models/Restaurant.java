@@ -8,8 +8,7 @@ public class Restaurant {
     private String location;
     ImageView image;
     String ImageUrl;
-
-
+    
     public ImageView getImage() {
         return image;
     }

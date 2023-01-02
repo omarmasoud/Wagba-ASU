@@ -2,8 +2,22 @@ package com.example.wagba.Models;
 
 public class User {
     public static final String UserSharedPref="USER_SHARED_PREF";
-    String Email,FirstName,LastName,UID,Gender;
-    int age;
+    String Email;
+    String FirstName;
+    String LastName;
+    String UID;
+    String Gender;
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
+    String PhoneNumber;
+    String age;
 
     public static String getUserSharedPref() {
         return UserSharedPref;
@@ -17,7 +31,7 @@ public class User {
         this.UID = UID;
     }
 
-    public User(String email, String firstName, String lastName, String UID, String gender, int age) {
+    public User(String email, String firstName, String lastName, String UID, String gender, String age) {
         Email = email;
         FirstName = firstName;
         LastName = lastName;
@@ -34,11 +48,11 @@ public class User {
         Gender = gender;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -47,7 +61,7 @@ public class User {
         FirstName = firstName;
         LastName = lastName;
         this.UID=UID;
-        this.age=20;
+        this.age="20";
         this.Gender="blank";
     }
 

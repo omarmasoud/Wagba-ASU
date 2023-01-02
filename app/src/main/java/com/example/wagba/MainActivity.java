@@ -2,6 +2,8 @@ package com.example.wagba;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
 
@@ -19,6 +21,7 @@ import android.widget.AbsListView;
 
 import com.example.wagba.AuthenticationScreens.LoginScreen;
 import com.example.wagba.AuthenticationScreens.ProfilePage;
+import com.example.wagba.GeneralScreens.OrderHistoryScreen;
 import com.example.wagba.GeneralScreens.PaymentScreen;
 import com.example.wagba.Models.User;
 import com.example.wagba.RestaurantRelatedScreens.CartScreen;
@@ -38,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_nav_bar);
+       BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_nav_bar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
         View fragmentcontainer=findViewById(R.id.fragmentcontainer);
-        fragmentcontainer.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+
+//        fragmentcontainer.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+
+        ConstraintLayout constraintLayout = findViewById(R.id.main_layout);
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+        constraintSet.connect(R.id.fragmentcontainer,ConstraintSet.BOTTOM,R.id.main_layout,ConstraintSet.BOTTOM,0);
+        constraintSet.applyTo(constraintLayout);
 //        SharedPreferences usersharedprefs=getApplicationContext().getSharedPreferences(User.UserSharedPref, MODE_PRIVATE);
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -59,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.profile:
                         Screen=new ProfilePage();
+                        break;
+                    case R.id.orders:
+                        Screen=new OrderHistoryScreen();
                         break;
                     default:
                         Screen=new RestaurantsScreen();

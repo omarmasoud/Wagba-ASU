@@ -7,25 +7,38 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.wagba.Models.Cart;
 import com.example.wagba.Models.MenuItem;
+import com.example.wagba.Models.Order;
 import com.example.wagba.Models.Restaurant;
 import com.example.wagba.Models.User;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class FirebaseAccessor {
     private static FirebaseAccessor firebaseAccessor;
+    private FirebaseAuth authenticator;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    private Date date;
+    private SimpleDateFormat formatter;
     private FirebaseAccessor(){
         this.database=FirebaseDatabase.getInstance();
         this.databaseReference=database.getReference("Wagba");
+        this.authenticator=FirebaseAuth.getInstance();
+
+        this.formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
     public static FirebaseAccessor getInstance(){
         if (FirebaseAccessor.firebaseAccessor==null)
@@ -56,9 +69,9 @@ public class FirebaseAccessor {
                 MenuItem menuItem = new MenuItem();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     menuItem.setName(dataSnapshot.child("name").getValue(String.class));
-                    menuItem.setRating(Float.parseFloat(dataSnapshot.child("rate").getValue(String.class)));
+//                    menuItem.setRating(Float.parseFloat(dataSnapshot.child("rate").getValue(String.class)));
                     menuItem.setPrice(Integer.parseInt(dataSnapshot.child("price").getValue(String.class)));
-                    menuItem.setImageSource(dataSnapshot.child("image").getValue(String.class));
+                    menuItem.setImageUrl(dataSnapshot.child("image").getValue(String.class));
                     menuItems.add(menuItem);
                 }
                 Toast.makeText(context, "loaded " + RestaurantName + " dishes successfully", Toast.LENGTH_SHORT).show();
@@ -83,6 +96,40 @@ public class FirebaseAccessor {
     public void addUser(User user){
         this.databaseReference.child("Users").child(user.getUID()).setValue(user);
 
+    }
+    public DatabaseReference getMenuOf(String RestaurantName){
+        DatabaseReference temp=databaseReference.child("Restaurants").child(RestaurantName).child("Dishes");
+        return temp;
+    }
+    public  void addOrder(){
+//        this.date= Calendar.getInstance().getTime();
+//        String strdate=formatter.format(this.date);
+        Cart.getCart().ExportCart();
+        Order order=Cart.getCart().getCurrentorder();
+//        order.setDeliveryLocation("3");
+        String orderdate=order.getDate();
+        this.databaseReference.child("Users").child(authenticator.getUid()).child("orders").child(orderdate).setValue(Cart.getCart().getItems());
+        this.databaseReference.child("Users").child(authenticator.getUid()).child("orders").child(orderdate).child("orderdata").setValue(order);
+
+
+    }
+    public DatabaseReference getOrders()
+    {
+        DatabaseReference temp=this.databaseReference.child("Users").child(authenticator.getUid()).child("orders");
+//        String Date,Status;
+//        int Itemcount;
+//        float price;
+        return temp;
+
+    }
+    public DatabaseReference getOrderStatus(String id){
+        DatabaseReference temp=this.databaseReference.child("Users")
+                .child(authenticator.getUid())
+                .child("orders")
+                .child(id)
+                .child("orderdata")
+                .child("status");
+        return temp;
     }
 
 }

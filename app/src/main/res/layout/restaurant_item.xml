@@ -23,18 +23,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/cardborders"
-        app:strokeWidth="3dp">
+        app:strokeWidth="0.5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/menu_card_layout"
+            android:id="@+id/cart_card_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             >
 
             <androidx.cardview.widget.CardView
@@ -46,9 +46,9 @@
                 android:layout_centerHorizontal="true"
                 app:cardCornerRadius="100dp"
                 app:layout_constraintBottom_toTopOf="@+id/restaurant_rating"
-                app:layout_constraintEnd_toStartOf="@+id/item_name"
-                app:layout_constraintStart_toStartOf="@+id/menu_card_layout"
-                app:layout_constraintTop_toTopOf="@+id/menu_card_layout"
+                app:layout_constraintEnd_toStartOf="@+id/orderId"
+                app:layout_constraintStart_toStartOf="@+id/cart_card_layout"
+                app:layout_constraintTop_toTopOf="@+id/cart_card_layout"
                 android:layout_marginStart="15dp"
                 android:layout_margin="10dp"
                 >
@@ -66,6 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+
                 style="@style/textviews"
 
                 android:text="@string/restaurant_name"
@@ -77,8 +78,11 @@
             <TextView
                 android:drawableLeft="@drawable/location_icon"
                 android:id="@+id/restaurant_location"
-                android:lines="2"
+                android:lines="1"
                 android:maxLines="5"
+                android:minWidth="70dp"
+                android:gravity="end"
+                android:lineSpacingExtra="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -105,6 +109,11 @@
                 android:clickable="false"
                 android:isIndicator="true"
                 android:backgroundTint="@color/recycler_background"
+                android:progressTint="@color/gold"
+                android:progressBackgroundTint="@color/shadowbg"
+                android:secondaryProgressTint="@color/shadowbg"
+
+
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

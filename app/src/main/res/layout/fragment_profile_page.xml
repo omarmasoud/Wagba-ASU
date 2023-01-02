@@ -1,14 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AuthenticationScreens.ProfilePage">
+    android:layout_height="wrap_content"
+    android:background="@drawable/oriental_food"
+    tools:context=".AuthenticationScreens.LoginScreen">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
 
-</FrameLayout>
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="20dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/payment_inner_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".AuthenticationScreens.LoginScreen"
+            tools:ignore="MissingClass">
+
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/textviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/your_profile"
+
+                />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_picture"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="100dp">
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile" />
+            </androidx.cardview.widget.CardView>
+
+            <EditText
+                android:id="@+id/edittextfirstname"
+                style="@style/edittexts"
+                android:layout_width="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                android:drawableLeft="@drawable/name_icon"
+                android:hint="@string/firstnamehint"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/edittextlastname"
+                style="@style/edittexts"
+                android:layout_width="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                android:drawableLeft="@drawable/name_icon"
+                android:hint="@string/lastnamehint"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/edittextage"
+                style="@style/edittexts"
+                android:layout_width="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                android:drawableLeft="@drawable/age_icon"
+                android:hint="@string/your_age"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/edittextgender"
+                style="@style/edittexts"
+                android:layout_width="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                android:drawableLeft="@drawable/gender_icon"
+                android:hint="Male or Female?"
+                android:inputType="text" />
+
+
+            <EditText
+                android:id="@+id/phonenumber"
+                style="@style/edittexts"
+                android:layout_width="wrap_content"
+                android:background="@drawable/edit_text_bg"
+                android:drawableLeft="@drawable/phoneicon"
+                android:hint="@string/phonehint"
+                android:inputType="phone" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <Button
+                android:id="@+id/edit"
+                android:layout_gravity="center"
+                style="@style/buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update" />
+
+                <Button
+                    android:id="@+id/signoutbtn"
+                    android:layout_gravity="center"
+                    style="@style/buttons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_out" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

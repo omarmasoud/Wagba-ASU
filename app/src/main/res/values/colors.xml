@@ -16,5 +16,8 @@
     <color name="redremove">#ed1b1b</color>
     <color name="recycler_background">#f8f4c0   </color>
     <color name="shadowbg">#b0b0b0</color>
-
+    <color name="gold">#f1bd00</color>
+    <color name="received">#db5400</color>
+    <color name="progress">#dbcf00</color>
+    <color name="delivered">#87db00</color>
 </resources>

@@ -1,9 +1,8 @@
 package com.example.wagba.Recyclers;
 
 import android.content.Context;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -85,6 +84,9 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             @Override
             public void onClick(View view) {
                 Fragment menuScreen=new MenuScreen();
+                final Bundle bundle = new Bundle();
+                bundle.putString("Restaurant",restaurant.getName());
+                menuScreen.setArguments(bundle);
                 FragmentManager fragmentManager = ((AppCompatActivity)view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentcontainer, menuScreen);

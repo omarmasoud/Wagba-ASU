@@ -4,18 +4,17 @@ import android.widget.ImageView;
 
 public class MenuItem {
     private String name;
-    private float rating;
     private float price;
     private int count;
     private ImageView image;
-    private String ImageSource;
+    private String ImageUrl;
 
-    public String getImageSource() {
-        return ImageSource;
+    public String getImageUrl() {
+        return ImageUrl;
     }
 
-    public void setImageSource(String imageSource) {
-        ImageSource = imageSource;
+    public void setImageUrl(String imageSource) {
+        ImageUrl = imageSource;
     }
 
     public int getCount() {
@@ -43,13 +42,7 @@ public class MenuItem {
         this.name = name;
     }
 
-    public float getRating() {
-        return rating;
-    }
 
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
 
     public float getPrice() {
         return price;

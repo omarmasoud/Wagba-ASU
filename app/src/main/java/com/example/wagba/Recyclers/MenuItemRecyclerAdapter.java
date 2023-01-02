@@ -1,40 +1,48 @@
 package com.example.wagba.Recyclers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wagba.Models.Cart;
 import com.example.wagba.R;
-import com.example.wagba.RestaurantRelatedScreens.MenuScreen;
 
 import java.util.ArrayList;
 
 import com.example.wagba.Models.MenuItem;
+import com.squareup.picasso.Picasso;
 
 
 public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecyclerAdapter.MenuItemsRecyclerViewHolder> {
     ArrayList<MenuItem> menuItems;
+    Context context;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
-    public MenuItemRecyclerAdapter(ArrayList<MenuItem> menuItems) {
+//    DatabaseReference reference;
+
+    public MenuItemRecyclerAdapter(Context context ,ArrayList<MenuItem> menuItems) {
+        Log.d("debug", "MenuItemRecyclerAdapter: ");
         this.menuItems = menuItems;
+        this.context=context;
+        preferences=context.getSharedPreferences(Cart.Tag,Context.MODE_PRIVATE);
+        editor=preferences.edit();
     }
 
     @NonNull
     @Override
     public MenuItemsRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("debug", "onCreateViewHolder: ");
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.menu_item, parent, false);
@@ -45,12 +53,19 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
     @Override
     public void onBindViewHolder(@NonNull MenuItemsRecyclerViewHolder holder, int position) {
+        Log.d("debug", "onBindViewHolder: ");
         MenuItem menuItem = this.menuItems.get(position);
-        holder.Image = menuItem.getImage();
-        holder.Rating.setRating(menuItem.getRating());
         holder.Name.setText(menuItem.getName());
         holder.Price.setText(Float.toString(menuItem.getPrice()) + " LE");
         holder.count.setText(Integer.toString(menuItem.getCount()));
+        holder.Image.setImageResource(R.drawable.profile);
+
+
+
+
+
+        try{Picasso.get().load(menuItem.getImageUrl()).fit().placeholder(R.drawable.dish).into(holder.Image);}
+        catch (Exception e){}
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -60,58 +75,65 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
                     case R.id.increment:
                         holder.count.setText(Integer.toString(count + 1));
+                        menuItem.setCount(count+1);
+
                         break;
                     case R.id.decrement:
-                        if (count > 0) {
+                        if (count > 1) {
                             holder.count.setText(Integer.toString(count - 1));
+                            menuItem.setCount(count-1);
                         } else {
-                            holder.count.setText("0");
+                            holder.count.setText(Integer.toString(count));
                         }
 
                         break;
                     default:
                         break;
                 }
+                holder.Price.setText(Float.toString(menuItem.getPrice()*menuItem.getCount()) + " LE");
             }
         };
         holder.add.setOnClickListener(listener);
         holder.remove.setOnClickListener(listener);
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment menuScreen=new MenuScreen();
-                FragmentManager fragmentManager = ((AppCompatActivity)view.getContext()).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer, menuScreen);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }});
 
+
+            holder.addtocart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Cart.getCart().addToCart(menuItem);
+                    Toast.makeText(context, Integer.toString(menuItem.getCount())+" of "+menuItem.getName() +" added to Cart",Toast.LENGTH_SHORT).show();
+                    Cart.getCart().storeData(context);
+                }
+            });
     }
 
     @Override
     public int getItemCount() {
-        return this.menuItems != null ? this.menuItems.size() : 0;
+        Log.d("debug", "getItemCount: ");
+        Log.d("itemcount", Integer.toString(menuItems.size()));
+        return this.menuItems.size();
     }
 
     public class MenuItemsRecyclerViewHolder extends RecyclerView.ViewHolder {
+
         TextView Name, Price, count;
-        RatingBar Rating;
         ImageView Image;
         Button add, remove;
-        ConstraintLayout layout;
+//        ConstraintLayout layout;
+        Button addtocart;
 
         public MenuItemsRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            Name = itemView.findViewById(R.id.item_name);
-            Rating = itemView.findViewById(R.id.item_rating);
+            Log.d("debug", "menuitemrecyclerviewholder: ");
+            Name = itemView.findViewById(R.id.orderId);
             Image = itemView.findViewById(R.id.item_image);
             Price = itemView.findViewById(R.id.item_price);
             count = itemView.findViewById(R.id.item_count);
             add = itemView.findViewById(R.id.increment);
             remove = itemView.findViewById(R.id.decrement);
-            layout = itemView.findViewById(R.id.menu_item_layout);
+//            layout = itemView.findViewById(R.id.menu_item_layout);
+            addtocart=itemView.findViewById(R.id.addtocartbtn);
 
         }
 

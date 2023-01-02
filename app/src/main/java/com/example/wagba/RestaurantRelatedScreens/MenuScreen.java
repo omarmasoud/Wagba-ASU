@@ -11,18 +11,26 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.example.wagba.Models.Restaurant;
 import com.example.wagba.R;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import com.example.wagba.Models.MenuItem;
 import com.example.wagba.Recyclers.MenuItemRecyclerAdapter;
+import com.example.wagba.RemoteAccess.FirebaseAccessor;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +47,14 @@ public class MenuScreen extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    RecyclerView recyclerView;
+    ArrayList<MenuItem>menuItems;
+    MenuItemRecyclerAdapter adapter;
+    Button cartbtn;
+    String RestaurantName;
+
 
     public MenuScreen() {
         // Required empty public constructor
@@ -61,32 +77,17 @@ public class MenuScreen extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    RecyclerView recyclerView;
-    ArrayList<MenuItem>menuItems;
-    MenuItemRecyclerAdapter adapter;
-    Button cartbtn;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            RestaurantName=getArguments().getString("Restaurant");
         }
         menuItems=new ArrayList<>();
-        MenuItem DummyMenuItem=new MenuItem();
-        ImageView dummyimage=new ImageView(getContext());
-        dummyimage.setImageResource(R.drawable.wagba);
-        DummyMenuItem.setImage(dummyimage);
-        DummyMenuItem.setName("Shawerma Crepe");
-        DummyMenuItem.setCount(1);
-        DummyMenuItem.setPrice(60);
-        DummyMenuItem.setRating((float)2.8);
 
-        for (int i = 0 ;i<20; i++)
-        {
-            menuItems.add(DummyMenuItem);
-        }
-        adapter=new MenuItemRecyclerAdapter(menuItems);
 
 
     }
@@ -94,25 +95,59 @@ public class MenuScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView=view.findViewById(R.id.menu_recycler);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext() ));
-        cartbtn=view.findViewById(R.id.gotocart);
-        cartbtn.setOnClickListener(new View.OnClickListener() {
+
+//        cartbtn=view.findViewById(R.id.gotocart);
+//        cartbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                        Fragment cartScreen=new CartScreen();
+//                        FragmentManager fragmentManager = ((AppCompatActivity)view.getContext()).getSupportFragmentManager();
+//                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                        fragmentTransaction.replace(R.id.fragmentcontainer, cartScreen);
+//                        fragmentTransaction.addToBackStack(null);
+//                        fragmentTransaction.commit();
+//                    }
+//
+//        });
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+//        setRecycler(menuItems);
+        FirebaseAccessor.getInstance().getMenuOf(RestaurantName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren())
+                {
+                    MenuItem menuItem=new MenuItem();
+                   Log.d("Dish Name", dataSnapshot.child("name").getValue(String.class));
+                   //set name
+                    menuItem.setName(dataSnapshot.child("name").getValue(String.class));
+                    Log.d(menuItem.getName(), "onDataChange: name ");
+                    //set price
+                    menuItem.setPrice(Float.parseFloat(dataSnapshot.child("price").getValue(String.class)));
+                    Log.d(Float.toString(menuItem.getPrice()), "onDataChange: price ");
+                    //set image url
+                    menuItem.setImageUrl(dataSnapshot.child("image").getValue(String.class));
+                    Log.d(menuItem.getImageUrl(), "onDataChange: imageurl ");
+                    //set count
+                    menuItem.setCount(1);
+                    menuItems.add(menuItem);
 
-                        Fragment cartScreen=new CartScreen();
-                        FragmentManager fragmentManager = ((AppCompatActivity)view.getContext()).getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragmentcontainer, cartScreen);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-                    }
 
+                }
+                setRecycler(menuItems);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
-
-
     }
 
     @Override
@@ -121,5 +156,19 @@ public class MenuScreen extends Fragment {
         // Inflate the layout for this fragment
 
         return inflater.inflate(R.layout.fragment_menu_screen, container, false);
+    }
+    public void setRecycler(ArrayList<MenuItem> menuItems){
+        recyclerView=(RecyclerView)getView().findViewById(R.id.menu_recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setDrawingCacheEnabled(true);
+        adapter=new MenuItemRecyclerAdapter(getContext(),menuItems);
+        adapter.notifyDataSetChanged();
+        LinearLayoutManager llm=new LinearLayoutManager(getContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setAdapter(adapter);
+
     }
 }

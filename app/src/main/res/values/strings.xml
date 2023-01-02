@@ -30,4 +30,13 @@
     <string name="proceed">Proceed</string>
     <string name="main">Main</string>
     <string name="cart">Cart</string>
+    <string name="your_age">Your Age</string>
+    <string name="update">Update</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="phonehint">+201.. phone number</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="order_id">Order Id</string>
+    <string name="delivery_gate_3">Delivery Gate: 3</string>
+    <string name="order_status">Order Status:Received</string>
+    <string name="male_or_female">Male or Female?</string>
 </resources>

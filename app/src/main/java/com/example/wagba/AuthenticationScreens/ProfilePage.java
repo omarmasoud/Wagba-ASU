@@ -1,14 +1,29 @@
 package com.example.wagba.AuthenticationScreens;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.example.wagba.Models.User;
 import com.example.wagba.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,12 +31,13 @@ import com.example.wagba.R;
  * create an instance of this fragment.
  */
 public class ProfilePage extends Fragment {
+    FirebaseAuth firebaseAuth;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    SharedPreferences sharedPreferences;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -49,12 +65,78 @@ public class ProfilePage extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Button Edit=view.findViewById(R.id.edit);
+        Button SignOut=view.findViewById(R.id.signoutbtn);
+        EditText fName,lName,genderedittext,phoneedittext,ageedittext;
+        ImageView image=view.findViewById(R.id.profile_image);
+        fName=view.findViewById(R.id.edittextfirstname);
+        lName=view.findViewById(R.id.edittextlastname);
+        genderedittext=view.findViewById(R.id.edittextgender);
+        phoneedittext=view.findViewById(R.id.phonenumber);
+        ageedittext=view.findViewById(R.id.edittextage);
+        String fname,lname,gender,phone,age;
+        firebaseAuth=FirebaseAuth.getInstance();
+//        editor.putString("Email", emailtext);
+//        editor.putString("FName", fName.getText().toString());
+//        editor.putString("LName", lName.getText().toString());
+//        editor.putString("Gender", gendertext);
+//        editor.putString("Phone", phonetext);
+//        editor.putString("Age", agetext);
+        sharedPreferences=getContext().getSharedPreferences(User.UserSharedPref, Context.MODE_PRIVATE);
+        fname=sharedPreferences.getString("FName", "first name");
+        lname=sharedPreferences.getString("LName", "last name");
+        gender=sharedPreferences.getString("Gender", "male");
+        phone=sharedPreferences.getString("Phone", "Phone number");
+        age=sharedPreferences.getString("Age", "Age");
+        fName.setText(fname);
+        lName.setText(lname);
+        genderedittext.setText(gender);
+        ageedittext.setText(age);
+        phoneedittext.setText(phone);
+        Log.d("gender", gender);
+        if(gender.equals("male")){
+
+            image.setImageResource(R.drawable.profile);
+        }
+        else{
+            image.setImageResource(R.drawable.woman);
+        }
+        SignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                ConstraintLayout constraintLayout = getActivity().findViewById(R.id.main_layout);
+                ConstraintSet constraintSet = new ConstraintSet();
+                constraintSet.clone(constraintLayout);
+                constraintSet.connect(R.id.fragmentcontainer,ConstraintSet.BOTTOM,R.id.main_layout,ConstraintSet.BOTTOM,0);
+                constraintSet.applyTo(constraintLayout);
+                BottomNavigationView bottomNavigationView=getActivity().findViewById(R.id.bottom_nav_bar);
+                bottomNavigationView.setVisibility(View.INVISIBLE);
+                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction=fragmentManager.beginTransaction();
+                Fragment Screen = new LoginScreen();
+                transaction.replace(R.id.fragmentcontainer, Screen);
+                transaction.commit();
+            }
+        });
+
+
+
+
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
